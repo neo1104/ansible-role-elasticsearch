@@ -17,7 +17,4 @@ elasticsearch_user: elasticsearch
 elasticsearch_heap_size: 2g
 elasticsearch_log_level: info
 elasticsearch_minimum_master_nodes: 2
-elasticsearch_ping_hosts:
-  - "elastic1"
-  - "elastic2"
-  - "elastic3"
+elasticsearch_ping_hosts: '"elastic1", "elastic2", "elastic3"'
