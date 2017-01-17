@@ -1,0 +1,23 @@
+---
+# defaults file for roles/elasticsearch
+
+
+elasticsearch_version: 5.1.1
+elasticsearch_rpm_path: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ elasticsearch_version }}.rpm
+
+elasticsearch_listen_ip: 192.168.35.10
+elasticsearch_port: 9200
+elasticsearch_node_name: elastic1
+elasticsearch_home_dir: /usr/share/elasticsearch
+elasticsearch_cluster_name: payonce
+elasticsearch_log_dir: /var/log/elasticsearch
+elasticsearch_conf_dir: /etc/elasticsearch
+elasticsearch_data_dir: /var/lib/elasticsearch
+elasticsearch_user: elasticsearch
+elasticsearch_heap_size: 2g
+elasticsearch_log_level: info
+elasticsearch_minimum_master_nodes: 2
+elasticsearch_ping_hosts:
+  - "elastic1"
+  - "elastic2"
+  - "elastic3"

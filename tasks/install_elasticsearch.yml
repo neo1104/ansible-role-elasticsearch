@@ -1,0 +1,6 @@
+---
+- name: download elasticsearch
+  yum:
+    name: "{{ elasticsearch_rpm_path }}"
+    state: present
+    update_cache: no

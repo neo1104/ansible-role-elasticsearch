@@ -1,0 +1,14 @@
+---
+- name: copy elasticsearch configure file
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ elasticsearch_conf_dir }}/{{ item }}"
+    owner: root
+    group: "{{ elasticsearch_user }}"
+    mode: 0660
+  with_items:
+    - elasticsearch.yml
+    - jvm.options
+    - log4j2.properties
+  notify:
+    - restart elasticsearch service
