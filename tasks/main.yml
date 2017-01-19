@@ -2,6 +2,8 @@
 # tasks file for roles/elasticsearch
 - name: include install_elasticsearch.yml
   include: install_elasticsearch.yml
+  tags:
+    - install
 - name: include configure_elasticsearch.yml
   include: configure_elasticsearch.yml
   tags:
