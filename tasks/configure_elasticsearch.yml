@@ -8,13 +8,13 @@
     mode: 0750
 
 
-  - name: copy elasticsearch logging configure file
-    template:
-      src: logging.yml.j2
-      dest: "{{ elasticsearch_conf_dir }}/logging.yml"
-      owner: root
-      group: "{{ elasticsearch_user }}"
-      mode: 0750
+- name: copy elasticsearch logging configure file
+  template:
+    src: logging.yml.j2
+    dest: "{{ elasticsearch_conf_dir }}/logging.yml"
+    owner: root
+    group: "{{ elasticsearch_user }}"
+    mode: 0750
 
 - name: copy elasticsearch sysconfig file
   template:
