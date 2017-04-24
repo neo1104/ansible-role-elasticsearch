@@ -1,14 +1,25 @@
 ---
 - name: copy elasticsearch configure file
   template:
-    src: "{{ item }}.j2"
-    dest: "{{ elasticsearch_conf_dir }}/{{ item }}"
+    src: elasticsearch.yml.j2
+    dest: "{{ elasticsearch_conf_dir }}/elasticsearch.yml"
     owner: root
     group: "{{ elasticsearch_user }}"
-    mode: 0660
-  with_items:
-    - elasticsearch.yml
-    - jvm.options
-    - log4j2.properties
-  notify:
-    - restart elasticsearch service
+    mode: 0750
+
+
+  - name: copy elasticsearch logging configure file
+    template:
+      src: logging.yml.j2
+      dest: "{{ elasticsearch_conf_dir }}/logging.yml"
+      owner: root
+      group: "{{ elasticsearch_user }}"
+      mode: 0750
+
+- name: copy elasticsearch sysconfig file
+  template:
+    src: elasticseatch.j2
+    dest: /etc/sysconfig/elasticsearch
+    owner: root
+    group: root
+    mode: 0644
