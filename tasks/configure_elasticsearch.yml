@@ -18,7 +18,7 @@
 
 - name: copy elasticsearch sysconfig file
   template:
-    src: elasticseatch.j2
+    src: elasticsearch.j2
     dest: /etc/sysconfig/elasticsearch
     owner: root
     group: root
