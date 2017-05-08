@@ -6,15 +6,30 @@
     owner: root
     group: "{{ elasticsearch_user }}"
     mode: 0750
+  notify:
+    - restart elasticsearch service
 
 
 - name: copy elasticsearch logging configure file
   template:
-    src: logging.yml.j2
-    dest: "{{ elasticsearch_conf_dir }}/logging.yml"
+    src: log4j2.properties.j2
+    dest: "{{ elasticsearch_conf_dir }}/log4j2.propertiese"
     owner: root
     group: "{{ elasticsearch_user }}"
     mode: 0750
+  notify:
+    - restart elasticsearch service
+
+
+- name: copy elasticsearch jvm configure file
+  template:
+    src: jvm.options.j2
+    dest: "{{ elasticsearch_conf_dir }}/jvm.options"
+    owner: root
+    group: "{{ elasticsearch_user }}"
+    mode: 0750
+  notify:
+    - restart elasticsearch service
 
 - name: copy elasticsearch sysconfig file
   template:
@@ -23,3 +38,5 @@
     owner: root
     group: root
     mode: 0644
+  notify:
+    - restart elasticsearch service

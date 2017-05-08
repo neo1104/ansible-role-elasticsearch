@@ -1,0 +1,26 @@
+---
+- name: ensure pam_limit.so enable
+  lineinfile:
+    dest: /etc/pam.d/login
+    line: "session required /lib64/security/pam_limits.so"
+    state: present
+
+- name: add limit setting in /etc/security/limits.conf
+  lineinfile:
+    dest: /etc/security/limits.conf
+    line: "* {{ item.type }} {{ item.resource }} {{ item.value }}"
+    regexp: '^.\s+{{ item.type }}\s+{{ item.resource }}\s+.*$'
+    state: present
+  with_items: "{{ pam_limits_param }}"
+
+# 在CentOS 6.x 版本，必须修改 /etc/security/limits.d/90-nproc.conf 文件
+# 才能对最大进程数修改生效
+- name: add limit setting in /etc/security/limits.d/90-nproc.conf
+  lineinfile:
+    dest: /etc/security/limits.d/90-nproc.conf
+    line: "* {{ item.type }} {{ item.resource }} {{ item.value }}"
+    regexp: '^.\s+{{ item.type }}\s+{{ item.resource }}\s+.*$'
+    state: present
+  with_items:
+  - { type: soft, resource: nproc, value: "{{ nproc_limits }}" }
+  - { type: hard, resource: nproc, value: "{{ nproc_limits }}" }
